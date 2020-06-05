@@ -1,0 +1,42 @@
+.topofpage{
+    background-color: beige;
+}
+
+.padding{
+    margin:  25px 50px 75px 100px;
+}
+
+.textpadding{
+    margin:  25px 50px 75px 25px;
+}
+.choicebuttons{
+    margin-bottom: 25px;
+}
+
+#choice {
+    
+
+}
+
+
+#mainbox{
+    height: 500px;
+    background-color: beige;
+}
+
+#title{
+    font-size: large;
+}
+
+#answers{
+    border-style: solid;
+}
+
+#choices{
+    border-style: solid;
+    list-style: none;
+}
+
+.choicebuttons{
+    margin-bottom: 25px;
+}
