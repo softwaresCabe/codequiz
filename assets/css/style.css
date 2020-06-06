@@ -14,8 +14,12 @@
 }
 
 #choice {
-    
+    justify-content: start;
 
+}
+
+#mylinkbtn{
+    src: url("highscores.html");
 }
 
 
@@ -29,11 +33,9 @@
 }
 
 #answers{
-    border-style: solid;
 }
 
 #choices{
-    border-style: solid;
     list-style: none;
 }
 
