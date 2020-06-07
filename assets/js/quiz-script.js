@@ -62,8 +62,6 @@ var questions = [
       window.location.replace("http://www.w3schools.com");
     })
 
-
-
   });
 
 
@@ -172,6 +170,8 @@ var questions = [
     $("#choices").append('<li id="choice"><button type="button" class="btn btn-primary">Go To Highscores</button></li>');
 
     // open high score webpage
+
+    
 
   }
 
