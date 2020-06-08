@@ -37,6 +37,7 @@ var questions = [
   let userAnswer;
   let rightAnswer;
   var isendQuiz = false;
+  var tempbtn = $("#choices");
 
   $(document).ready(function() {
     $("#startbutton").on("click", function() {
@@ -52,20 +53,24 @@ var questions = [
 
     });
 
+     // submit score to localstorage
+     $("#submit").on("click", function(){
+      console.log("here");
+    })
+
+    $("button").click(function(){
+      window.location.replace("highscores.html");
+    });
+
     //Get users answer
     $(document).on("click",".choicebuttons", answerClicked)
 
-    $("#mylinkbtn").on("click", function (){
-      // link to highscores
-      console.log("here");
-
-      window.location.replace("http://www.w3schools.com");
+    // go to highscores clicked
+    $(".mylinkbtn").on("click", function(){
+      window.location.replace("highscores.html");
     })
 
   });
-
-
-
 
 
   function startQuestion(){
@@ -93,6 +98,7 @@ var questions = [
     val = setInterval(function(){
       if(totalTime < 0){
         $("#timer").text(" Time : 0 ");
+        endQuiz();
         clearInterval(val);
       }
       else{
@@ -113,9 +119,6 @@ var questions = [
 
     }, 1000);
 
-    if(totalTime < 0){
-      endQuiz();
-    }
 
   };
 
@@ -123,7 +126,6 @@ var questions = [
     userAnswer = $(this).attr("data-choice");
     if(userAnswer === rightAnswer){
       correct += 1;
-      console.log(correct);
       $("#grade").text(" Correct ! ");
     }else{
       totalTime -= 15;
@@ -159,20 +161,62 @@ var questions = [
     $('#title').text(" All Done ! ");
 
     // calculate Score
-    var temp = 100 / questions.length;
-    score = temp * correct;
+    var x = 100 / questions.length;
+    score = x * correct;
 
 
     //Show Score
     $('#info').text(" Your Score : " + score + " % ");
 
-    // Show button to go to highscores Page
-    $("#choices").append('<li id="choice"><button type="button" class="btn btn-primary">Go To Highscores</button></li>');
+    // Show score form
+    $("#choices").append('<label for="exampleInputEmail1">Your Initals</label><input type="initals" class="col-6" aria-describedby="emailHelp" placeholder="Example- KC "></div><button class="btn btn-primary" onclick ="submit()"> Submit </button>');
+  }
 
-    // open high score webpage
+
+  function submit(){
+    var userInitial = [];
+    var userScore = [];
+
+    //Retieve users Ininitals array from local storage
+    var retrievedData = localStorage.getItem("myuserInitials");
+
+    userInitial = JSON.parse(retrievedData);
+
+    //Retrieve Users Scores array from local storage
+
+    var retrievedData = localStorage.getItem("myUserScores");
+
+    allScores = JSON.parse(retrievedData);
+
+
+    if(userInitial !== null && allScores !== null){
+      userInitial.push($('input').val());
+      //Push Users name onto all users name array
+      allScores.push(score);
+
+    }
+
+    else{
+      userInitial[0].push($('input').val());
+      //Push Users name onto all users name array
+      allScores[0].push(score);
+    }
+
 
     
 
+    if (typeof(Storage) !== "undefined") {
+      // Code for localStorage/sessionStorage.
+      localStorage.setItem("myuserInitials", JSON.stringify(userInitial));
+      localStorage.setItem("score", score);
+      
+    } else {
+      // Sorry! No Web Storage support..
+    }
+
+   window.location.replace("highscores.html");
+
   }
+
 
   
