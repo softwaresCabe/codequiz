@@ -37,7 +37,7 @@ var questions = [
   let userAnswer;
   let rightAnswer;
   var isendQuiz = false;
-  var tempbtn = $("#choices");
+  //var tempbtn = $("#choices");
 
   $(document).ready(function() {
     $("#startbutton").on("click", function() {
@@ -174,8 +174,8 @@ var questions = [
 
 
   function submit(){
-    var userInitial = [];
-    var userScore = [];
+    var userInitial = [0];
+    var userScore = [0];
 
     //Retieve users Ininitals array from local storage
     var retrievedData = localStorage.getItem("myuserInitials");
@@ -189,34 +189,19 @@ var questions = [
     allScores = JSON.parse(retrievedData);
 
 
-    if(userInitial !== null && allScores !== null){
-      userInitial.push($('input').val());
-      //Push Users name onto all users name array
-      allScores.push(score);
-
-    }
-
-    else{
-      userInitial[0].push($('input').val());
-      //Push Users name onto all users name array
-      allScores[0].push(score);
-    }
-
-
+    userInitial.push($('input').val());
+    //Push Users name onto all users name array
+    allScores.push(score);
     
-
-    if (typeof(Storage) !== "undefined") {
-      // Code for localStorage/sessionStorage.
-      localStorage.setItem("myuserInitials", JSON.stringify(userInitial));
-      localStorage.setItem("score", score);
-      
-    } else {
-      // Sorry! No Web Storage support..
-    }
+  if (typeof(Storage) !== "undefined") {
+    // Code for localStorage/sessionStorage.
+    localStorage.setItem("myuserInitials", JSON.stringify(userInitial));
+    localStorage.setItem("score", score);
+    
+  } else {
+    // Sorry! No Web Storage support..
+  }
 
    window.location.replace("highscores.html");
 
   }
-
-
-  
